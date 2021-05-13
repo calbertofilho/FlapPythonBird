@@ -242,10 +242,8 @@ def main():
         file = manipulate_file()
         set_high_score(file, str(high_score))
         file.close()
-    # Teste da sistema que o jogo está rodando
-    sound_type = 'ogg'
-    if 'win' in plat:
-        sound_type = 'wav'
+    # Testa o sistema em que o jogo está rodando
+    sound_type = 'wav' if 'win' in plat else 'ogg'
     # Carregamento dos sons do jogo
     sounds = [
         pygame.mixer.Sound(f'{BASE_DIR}/assets/sounds/{sound_type}/die.{sound_type}'),
@@ -357,7 +355,7 @@ def main():
         bird_group.draw(screen)                            # Desenha o pássaro
         pipe_group.draw(screen)                            # Desenha os canos
         ground_group.draw(screen)                          # Desenha o chão
-#        # Desenha uma linha no local da pontuação
+#        # Desenha uma linha no local da pontuação, onde o cano passa do pássaro
 #        pygame.draw.line(screen, RED, [goal, 0], [goal, SCREEN_HEIGHT], 2)
         draw_score(screen, str(score), 'center', 'top')    # Desenha a pontuação do jogo
         # Atualização da tela
@@ -370,7 +368,7 @@ def main():
                 False,
                 False,
                 pygame.sprite.collide_mask
-            ) or                              # O jogo acaba se bater no chão ou
+            ) or                              # O jogo acaba se o pássaro bater no chão ou
             pygame.sprite.groupcollide(
                 bird_group,
                 pipe_group,
@@ -390,7 +388,7 @@ def main():
                 file = manipulate_file()
                 set_high_score(file, str(score))
                 file.close()
-            pygame.time.wait(1000)                                     # Aguardar 3seg
+            pygame.time.wait(1000)                                     # Aguarda 1seg
             execucao = False                                           # Saída do laço
 
 try:
