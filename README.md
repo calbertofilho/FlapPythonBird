@@ -1,5 +1,5 @@
 # FlapPythonBird
-Clone do jogo FlappyBird, desenvolvido em Python com a biblioteca Pygame
+Clone do jogo FlappyBird, desenvolvido em Python, utilizando a biblioteca Pygame
 
 
 Dependências:
