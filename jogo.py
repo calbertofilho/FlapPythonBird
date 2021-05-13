@@ -4,6 +4,7 @@ Utilizando a biblioteca: PyGame
 
 Criado por: Carlos Alberto Morais Moura Filho
 Versão: 1.0
+Atualizado em: 13/05/2021
 '''
 # pylint: disable=no-member
 # pylint: disable=too-many-locals
@@ -213,7 +214,7 @@ def draw_score(sface, value, align, position):
     # Desenha a pontuação na tela
     for img in enumerate(score_img):
         sface.blit(img[1], (score_img_pos_x, score_img_pos_y))
-        score_img_pos_x += img[1].get_width()
+        score_img_pos_x += img[1].get_width()    # Posição X para desenhar o próximo digito
 
 def main():
     '''Função principal que trata de toda a execução do jogo'''
