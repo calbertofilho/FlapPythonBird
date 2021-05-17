@@ -4,7 +4,7 @@ Utilizando a biblioteca: PyGame
 
 Criado por: Carlos Alberto Morais Moura Filho
 Versão: 1.0
-Atualizado em: 13/05/2021
+Atualizado em: 16/05/2021
 '''
 # pylint: disable=no-member
 # pylint: disable=too-many-locals
@@ -263,11 +263,9 @@ def main():
         pygame.image.load(f'{BASE_DIR}/assets/sprites/sceneries/day.png'),
         pygame.image.load(f'{BASE_DIR}/assets/sprites/sceneries/night.png')
     ]
-    background = backgrounds[0]
     journeys = ['day', 'night']
     journey = choice(journeys)
-    if journey == 'night':
-        background = backgrounds[1]
+    background = backgrounds[1] if journey == 'night' else backgrounds[1]
     background = pygame.transform.scale(background, (SCREEN_WIDTH, SCREEN_HEIGHT))
     # Criação do pássaro
     bird_group = pygame.sprite.Group()
