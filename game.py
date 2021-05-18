@@ -393,7 +393,7 @@ try:
     while True:
         main()
 except (ValueError, TypeError, ZeroDivisionError) as exc:
-    print(f"Oops! {exc.__class__} occurred. {exc.args}")
+    print(f"Oops! {exc.__class__} occurred.\n{exc.args}")
 else:
     if info()[0] is not None:
         print(f"Oops! {info()[0]} occurred.")
