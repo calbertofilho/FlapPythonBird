@@ -4,7 +4,7 @@ Utilizando a biblioteca: PyGame
 
 Criado por: Carlos Alberto Morais Moura Filho
 Versão: 1.0
-Atualizado em: 16/05/2021
+Atualizado em: 17/05/2021
 '''
 # pylint: disable=no-member
 # pylint: disable=too-many-locals
@@ -43,7 +43,7 @@ class Bird(pygame.sprite.Sprite):
     '''Classe que representa o pássaro'''
     def __init__(self, color):
         pygame.sprite.Sprite.__init__(self)
-        self.images = [
+        self.images = (
             pygame.image.load(
                 f'{BASE_DIR}/assets/sprites/birds/{color}/upflap.png'
             ).convert_alpha(),
@@ -53,7 +53,7 @@ class Bird(pygame.sprite.Sprite):
             pygame.image.load(
                 f'{BASE_DIR}/assets/sprites/birds/{color}/downflap.png'
             ).convert_alpha()
-        ]
+        )
         self.speed = SPEED
         self.current_image = 0
         self.image = self.images[self.current_image]
@@ -85,10 +85,10 @@ class Pipe(pygame.sprite.Sprite):
     '''Classe que representa os canos'''
     def __init__(self, color, inverted, pos_x, size_y):
         pygame.sprite.Sprite.__init__(self)
-        self.images = [
+        self.images = (
             pygame.image.load(f'{BASE_DIR}/assets/sprites/pipes/{color}.png').convert_alpha(),
             pygame.image.load(f'{BASE_DIR}/assets/sprites/pipes/{color}.png').convert_alpha()
-        ]
+        )
         self.current_image = 0
         self.image = self.images[self.current_image]
         self.image = pygame.transform.scale(self.image, (PIPE_WIDTH,PIPE_HEIGHT))
@@ -174,7 +174,7 @@ def get_high_score(file):
 def draw_score(sface, value, align, position):
     '''Função que desenha e exibe a pontuação na tela'''
     # Criação dos números gráficos da pontuação do jogo
-    numbers = [
+    numbers = (
         pygame.image.load(f'{BASE_DIR}/assets/sprites/numbers/0.png').convert_alpha(),
         pygame.image.load(f'{BASE_DIR}/assets/sprites/numbers/1.png').convert_alpha(),
         pygame.image.load(f'{BASE_DIR}/assets/sprites/numbers/2.png').convert_alpha(),
@@ -185,7 +185,7 @@ def draw_score(sface, value, align, position):
         pygame.image.load(f'{BASE_DIR}/assets/sprites/numbers/7.png').convert_alpha(),
         pygame.image.load(f'{BASE_DIR}/assets/sprites/numbers/8.png').convert_alpha(),
         pygame.image.load(f'{BASE_DIR}/assets/sprites/numbers/9.png').convert_alpha()
-    ]
+    )
     score_img_width = 0
     # Cria uma lista com os números da pontuação
     score = list(value)
@@ -245,31 +245,31 @@ def main():
     # Testa o sistema em que o jogo está rodando
     sound_type = 'wav' if 'win' in plat else 'ogg'
     # Carregamento dos sons do jogo
-    sounds = [
+    sounds = (
         pygame.mixer.Sound(f'{BASE_DIR}/assets/sounds/{sound_type}/die.{sound_type}'),
         pygame.mixer.Sound(f'{BASE_DIR}/assets/sounds/{sound_type}/hit.{sound_type}'),
         pygame.mixer.Sound(f'{BASE_DIR}/assets/sounds/{sound_type}/point.{sound_type}'),
         pygame.mixer.Sound(f'{BASE_DIR}/assets/sounds/{sound_type}/swoosh.{sound_type}'),
         pygame.mixer.Sound(f'{BASE_DIR}/assets/sounds/{sound_type}/wing.{sound_type}')
-    ]
+    )
     # Criação das mensagens do jogo
-    messages = [
+    messages = (
         pygame.image.load(f'{BASE_DIR}/assets/sprites/messages/start_game.png').convert_alpha(),
         pygame.image.load(f'{BASE_DIR}/assets/sprites/messages/game_over.png').convert_alpha(),
         pygame.image.load(f'{BASE_DIR}/assets/sprites/messages/high_score.png').convert_alpha()
-    ]
+    )
     # Criação da imagem de fundo
-    backgrounds = [
+    backgrounds = (
         pygame.image.load(f'{BASE_DIR}/assets/sprites/sceneries/day.png'),
         pygame.image.load(f'{BASE_DIR}/assets/sprites/sceneries/night.png')
-    ]
-    journeys = ['day', 'night']
+    )
+    journeys = ('day', 'night')
     journey = choice(journeys)
     background = backgrounds[1] if journey == 'night' else backgrounds[1]
     background = pygame.transform.scale(background, (SCREEN_WIDTH, SCREEN_HEIGHT))
     # Criação do pássaro
     bird_group = pygame.sprite.Group()
-    bird_colors = ['blue', 'red', 'yellow']
+    bird_colors = ('blue', 'red', 'yellow')
     bird = Bird(choice(bird_colors))
     bird_group.add(bird)
     goal = (((bird.rect[0] - bird.get_width()) // 10) - 1) * 10     # Define a linha de pontuação
