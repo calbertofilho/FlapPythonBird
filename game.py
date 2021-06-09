@@ -4,7 +4,7 @@ Utilizando a biblioteca: PyGame
 
 Criado por: Carlos Alberto Morais Moura Filho
 Versão: 1.0
-Atualizado em: 18/05/2021
+Atualizado em: 09/06/2021
 '''
 # pylint: disable=no-member
 # pylint: disable=too-many-locals
