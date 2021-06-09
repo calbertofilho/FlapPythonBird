@@ -22,6 +22,13 @@ import pygame
 from pygame.constants import ( QUIT, KEYDOWN, K_ESCAPE, K_SPACE )
 # Constantes
 BASE_DIR = path.dirname(__file__)    # Diretorio do jogo
+SOUNDS_PATH = path.normpath(path.join(BASE_DIR, 'res\\sounds'))
+ICON_PATH = path.normpath(path.join(BASE_DIR, 'res\\assets\\icons'))
+BIRDS_PATH = path.normpath(path.join(BASE_DIR, 'res\\assets\\birds'))
+PIPES_PATH = path.normpath(path.join(BASE_DIR, 'res\\assets\\pipes'))
+SCENERY_PATH = path.normpath(path.join(BASE_DIR, 'res\\assets\\sceneries'))
+NUMS_PATH = path.normpath(path.join(BASE_DIR, 'res\\assets\\numbers'))
+MSGS_PATH = path.normpath(path.join(BASE_DIR, 'res\\assets\\messages'))
 SCREEN_WIDTH = 400                   # Comprimento da tela
 SCREEN_HEIGHT = 800                  # Altura da tela
 RED = (255, 0, 0)                    # Cor vermelha, para a linha de pontuação
@@ -45,13 +52,13 @@ class Bird(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.images = (
             pygame.image.load(
-                f'{BASE_DIR}/assets/sprites/birds/{color}/upflap.png'
+                f'{BIRDS_PATH}/{color}/upflap.png'
             ).convert_alpha(),
             pygame.image.load(
-                f'{BASE_DIR}/assets/sprites/birds/{color}/midflap.png'
+                f'{BIRDS_PATH}/{color}/midflap.png'
             ).convert_alpha(),
             pygame.image.load(
-                f'{BASE_DIR}/assets/sprites/birds/{color}/downflap.png'
+                f'{BIRDS_PATH}/{color}/downflap.png'
             ).convert_alpha()
         )
         self.speed = SPEED
@@ -86,8 +93,8 @@ class Pipe(pygame.sprite.Sprite):
     def __init__(self, color, inverted, pos_x, size_y):
         pygame.sprite.Sprite.__init__(self)
         self.images = (
-            pygame.image.load(f'{BASE_DIR}/assets/sprites/pipes/{color}.png').convert_alpha(),
-            pygame.image.load(f'{BASE_DIR}/assets/sprites/pipes/{color}.png').convert_alpha()
+            pygame.image.load(f'{PIPES_PATH}/{color}.png').convert_alpha(),
+            pygame.image.load(f'{PIPES_PATH}/{color}.png').convert_alpha()
         )
         self.current_image = 0
         self.image = self.images[self.current_image]
@@ -118,7 +125,7 @@ class Ground(pygame.sprite.Sprite):
     def __init__(self, pos_x):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load(
-            f'{BASE_DIR}/assets/sprites/sceneries/ground.png'
+            f'{SCENERY_PATH}/ground.png'
         ).convert_alpha()
         self.image = pygame.transform.scale(self.image, (GROUND_WIDTH, GROUND_HEIGHT))
         self.mask = pygame.mask.from_surface(self.image)
@@ -175,16 +182,16 @@ def draw_score(sface, value, align, position):
     '''Função que desenha e exibe a pontuação na tela'''
     # Criação dos números gráficos da pontuação do jogo
     numbers = (
-        pygame.image.load(f'{BASE_DIR}/assets/sprites/numbers/0.png').convert_alpha(),
-        pygame.image.load(f'{BASE_DIR}/assets/sprites/numbers/1.png').convert_alpha(),
-        pygame.image.load(f'{BASE_DIR}/assets/sprites/numbers/2.png').convert_alpha(),
-        pygame.image.load(f'{BASE_DIR}/assets/sprites/numbers/3.png').convert_alpha(),
-        pygame.image.load(f'{BASE_DIR}/assets/sprites/numbers/4.png').convert_alpha(),
-        pygame.image.load(f'{BASE_DIR}/assets/sprites/numbers/5.png').convert_alpha(),
-        pygame.image.load(f'{BASE_DIR}/assets/sprites/numbers/6.png').convert_alpha(),
-        pygame.image.load(f'{BASE_DIR}/assets/sprites/numbers/7.png').convert_alpha(),
-        pygame.image.load(f'{BASE_DIR}/assets/sprites/numbers/8.png').convert_alpha(),
-        pygame.image.load(f'{BASE_DIR}/assets/sprites/numbers/9.png').convert_alpha()
+        pygame.image.load(f'{NUMS_PATH}/0.png').convert_alpha(),
+        pygame.image.load(f'{NUMS_PATH}/1.png').convert_alpha(),
+        pygame.image.load(f'{NUMS_PATH}/2.png').convert_alpha(),
+        pygame.image.load(f'{NUMS_PATH}/3.png').convert_alpha(),
+        pygame.image.load(f'{NUMS_PATH}/4.png').convert_alpha(),
+        pygame.image.load(f'{NUMS_PATH}/5.png').convert_alpha(),
+        pygame.image.load(f'{NUMS_PATH}/6.png').convert_alpha(),
+        pygame.image.load(f'{NUMS_PATH}/7.png').convert_alpha(),
+        pygame.image.load(f'{NUMS_PATH}/8.png').convert_alpha(),
+        pygame.image.load(f'{NUMS_PATH}/9.png').convert_alpha()
     )
     score_img_width = 0
     # Cria uma lista com os números da pontuação
@@ -216,6 +223,13 @@ def draw_score(sface, value, align, position):
         sface.blit(img[1], (score_img_pos_x, score_img_pos_y))
         score_img_pos_x += img[1].get_width()    # Posição X para desenhar o próximo digito
 
+def close_game():
+    '''Função que encerra todas as bibliotecas e fecha o jogo'''
+    pygame.display.quit()
+    pygame.mixer.quit()
+    pygame.quit()
+    ext()
+
 def main():
     '''Função principal que trata de toda a execução do jogo'''
     # Centraliza a janela do jogo no monitor
@@ -226,7 +240,7 @@ def main():
     run = False
     # Criação da janela
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    icon = pygame.image.load(f'{BASE_DIR}/assets/sprites/icons/icon.png').convert_alpha()
+    icon = pygame.image.load(f'{ICON_PATH}/icon.png').convert_alpha()
     pygame.display.set_icon(icon)
     pygame.display.set_caption('Flappy Bird v1.0')
     # Contador de pontuação do jogo
@@ -246,22 +260,22 @@ def main():
     sound_type = 'wav' if 'win' in plat else 'ogg'
     # Carregamento dos sons do jogo
     sounds = (
-        pygame.mixer.Sound(f'{BASE_DIR}/assets/sounds/{sound_type}/die.{sound_type}'),
-        pygame.mixer.Sound(f'{BASE_DIR}/assets/sounds/{sound_type}/hit.{sound_type}'),
-        pygame.mixer.Sound(f'{BASE_DIR}/assets/sounds/{sound_type}/point.{sound_type}'),
-        pygame.mixer.Sound(f'{BASE_DIR}/assets/sounds/{sound_type}/swoosh.{sound_type}'),
-        pygame.mixer.Sound(f'{BASE_DIR}/assets/sounds/{sound_type}/wing.{sound_type}')
+        pygame.mixer.Sound(f'{SOUNDS_PATH}/{sound_type}/die.{sound_type}'),
+        pygame.mixer.Sound(f'{SOUNDS_PATH}/{sound_type}/hit.{sound_type}'),
+        pygame.mixer.Sound(f'{SOUNDS_PATH}/{sound_type}/point.{sound_type}'),
+        pygame.mixer.Sound(f'{SOUNDS_PATH}/{sound_type}/swoosh.{sound_type}'),
+        pygame.mixer.Sound(f'{SOUNDS_PATH}/{sound_type}/wing.{sound_type}')
     )
     # Criação das mensagens do jogo
     messages = (
-        pygame.image.load(f'{BASE_DIR}/assets/sprites/messages/start_game.png').convert_alpha(),
-        pygame.image.load(f'{BASE_DIR}/assets/sprites/messages/game_over.png').convert_alpha(),
-        pygame.image.load(f'{BASE_DIR}/assets/sprites/messages/high_score.png').convert_alpha()
+        pygame.image.load(f'{MSGS_PATH}/start_game.png').convert_alpha(),
+        pygame.image.load(f'{MSGS_PATH}/game_over.png').convert_alpha(),
+        pygame.image.load(f'{MSGS_PATH}/high_score.png').convert_alpha()
     )
     # Criação da imagem de fundo
     backgrounds = (
-        pygame.image.load(f'{BASE_DIR}/assets/sprites/sceneries/day.png'),
-        pygame.image.load(f'{BASE_DIR}/assets/sprites/sceneries/night.png')
+        pygame.image.load(f'{SCENERY_PATH}/day.png'),
+        pygame.image.load(f'{SCENERY_PATH}/night.png')
     )
     journeys = ('day', 'night')
     journey = choice(journeys)
@@ -295,12 +309,10 @@ def main():
         screen.blit(splash, (splash_x, splash_y))
         for event in pygame.event.get():
             if event.type == QUIT:
-                pygame.quit()
-                ext()
+                close_game()
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
-                    pygame.quit()
-                    ext()
+                    close_game()
                 if event.key == K_SPACE:
                     splash = False
                     run = True
@@ -319,8 +331,7 @@ def main():
         for event in pygame.event.get():
             # Evento que fecha a janela
             if event.type == QUIT:
-                pygame.quit()
-                ext()
+                close_game()
             # Evento que identifica a tecla pressionada
             if event.type == KEYDOWN:
                 # Teste para saber se a tecla é "BARRA DE ESPAÇO"
@@ -390,13 +401,28 @@ def main():
             run = False                                                # Saída do laço
 
 try:
-    while True:
-        main()
-except (ValueError, TypeError, ZeroDivisionError) as exc:
-    print(f"Oops! {exc.__class__} occurred.\n{exc.args}")
-else:
-    if info()[0] is not None:
-        print(f"Oops! {info()[0]} occurred.")
+    if __name__ == "__main__":
+        while True:
+            main()
+except SyntaxError as syntax_exception:
+    print(f'Oops! Ocorreu um erro de sintaxe no código.\n\
+        __class__ = {syntax_exception.__class__}\n\
+        __doc__ = {syntax_exception.__doc__}\n\
+        args = {syntax_exception.args}')
+except (ValueError, ZeroDivisionError) as value_exception:
+    print(f'Oops! Ocorreu um erro de valores.\n\
+        __class__ = {value_exception.__class__}\n\
+        __doc__ = {value_exception.__doc__}\n\
+        args = {value_exception.args}')
+except TypeError as type_exception:
+    print(f'Oops! Ocorreu um erro de conversão de tipo de dados.\n\
+        __class__ = {type_exception.__class__}\n\
+        __doc__ = {type_exception.__doc__}\n\
+        args = {type_exception.args}')
+except Exception as general_exception:
+    print(f'Oops! Ocorreu um erro não identificado.\n\
+        __class__ = {general_exception.__class__}\n\
+        __doc__ = {general_exception.__doc__}\n\
+        args = {general_exception.args}')
 finally:
-    pygame.quit()
-    ext()
+    close_game()
