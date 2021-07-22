@@ -22,13 +22,13 @@ import pygame
 from pygame.constants import ( QUIT, KEYDOWN, K_ESCAPE, K_SPACE )
 # Constantes
 BASE_DIR = path.dirname(__file__)    # Diretorio do jogo
-SOUNDS_PATH = path.normpath(path.join(BASE_DIR, 'res\\sounds'))
-ICON_PATH = path.normpath(path.join(BASE_DIR, 'res\\assets\\icons'))
-BIRDS_PATH = path.normpath(path.join(BASE_DIR, 'res\\assets\\birds'))
-PIPES_PATH = path.normpath(path.join(BASE_DIR, 'res\\assets\\pipes'))
-SCENERY_PATH = path.normpath(path.join(BASE_DIR, 'res\\assets\\sceneries'))
-NUMS_PATH = path.normpath(path.join(BASE_DIR, 'res\\assets\\numbers'))
-MSGS_PATH = path.normpath(path.join(BASE_DIR, 'res\\assets\\messages'))
+SOUNDS_PATH = path.normpath(path.join(BASE_DIR, 'res//sounds'))
+ICON_PATH = path.normpath(path.join(BASE_DIR, 'res//assets//icons'))
+BIRDS_PATH = path.normpath(path.join(BASE_DIR, 'res//assets//birds'))
+PIPES_PATH = path.normpath(path.join(BASE_DIR, 'res//assets//pipes'))
+SCENERY_PATH = path.normpath(path.join(BASE_DIR, 'res//assets//sceneries'))
+NUMS_PATH = path.normpath(path.join(BASE_DIR, 'res//assets//numbers'))
+MSGS_PATH = path.normpath(path.join(BASE_DIR, 'res//assets//messages'))
 SCREEN_WIDTH = 400                   # Comprimento da tela
 SCREEN_HEIGHT = 800                  # Altura da tela
 RED = (255, 0, 0)                    # Cor vermelha, para a linha de pontuação
@@ -399,7 +399,7 @@ def main():
                 file.close()
             pygame.time.wait(1000)                                     # Aguarda 1seg
             run = False                                                # Saída do laço
-
+main()
 try:
     if __name__ == "__main__":
         while True:
