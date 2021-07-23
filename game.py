@@ -399,7 +399,7 @@ def main():
                 file.close()
             pygame.time.wait(1000)                                     # Aguarda 1seg
             run = False                                                # Saída do laço
-main()
+
 try:
     if __name__ == "__main__":
         while True:
