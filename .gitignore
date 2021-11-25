@@ -1,0 +1,8 @@
+# folders and files for build the executable
+__pycache__/
+build/
+game.spec
+# folder with game ready for distribution
+dist/
+# resource created automatically by the game
+score.dat
