@@ -6,3 +6,6 @@ game.spec
 dist/
 # resource created automatically by the game
 score.dat
+#
+download/setup/
+download/setup.vw2
