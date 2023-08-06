@@ -14,12 +14,12 @@ Atualizado em: 11/06/2021
 # pylint: disable=no-name-in-module
 
 # Bibliotecas
-from os import path, environ
+from os import path, environ, getcwd, chdir
 from random import randint, choice
-from sys import platform as plat, exit as ext, exc_info as info
+from sys import platform as plat, exit as ext, path as syspath
 import pickle
-import pygame
-from pygame.constants import ( QUIT, KEYDOWN, K_ESCAPE, K_SPACE )
+import pygame, sys
+from pygame.constants import QUIT, KEYDOWN, K_ESCAPE, K_SPACE
 # Constantes
 BASE_DIR = path.dirname(__file__)    # Diretorio do jogo
 SOUNDS_PATH = path.normpath(path.join(BASE_DIR, 'res/sounds'))
@@ -45,6 +45,11 @@ HIT = 1                              # Identificação para o som de colisão
 POINT = 2                            # Identificação para o som de pontuação
 SWOOSH = 3                           # Identificação para o som da corrente de ar
 WING = 4                             # Identificação para o som de voo
+# Comandos para o PyInstaller
+dirpath = getcwd()
+syspath.append(dirpath)
+if getattr(sys, "frozen", False):
+    chdir(sys._MEIPASS)
 
 class Bird(pygame.sprite.Sprite):
     '''Classe que representa o pássaro'''
