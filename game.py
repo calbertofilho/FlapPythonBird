@@ -117,14 +117,6 @@ class Pipe(pygame.sprite.Sprite):
         '''Função que representa como os canos se comportam em cada interação no jogo'''
         self.rect[0] -= GAME_SPEED
 
-    def get_width(self):
-        '''Função que retorna o comprimento do cano'''
-        return self.image.get_size()[0]
-
-    def get_height(self):
-        '''Função que retorna a altura do cano'''
-        return self.image.get_size()[1]
-
 class Ground(pygame.sprite.Sprite):
     '''Classe que representa o chão'''
     def __init__(self, pos_x):
