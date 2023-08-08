@@ -1,5 +1,0 @@
-Pasta para instalação
-pyinstaller --noconfirm --onedir --windowed --icon "C:/Users/STOCK/Códigos Fonte/Python/FlapPythonBird/res/assets/icons/icon.ico" --add-data "C:/Users/STOCK/Códigos Fonte/Python/FlapPythonBird/res;res/" --hidden-import "pygame"  "C:/Users/STOCK/Códigos Fonte/Python/FlapPythonBird/game.py"
-
-Portable
-pyinstaller --noconfirm --onefile --windowed --icon "C:/Users/STOCK/Códigos Fonte/Python/FlapPythonBird/res/assets/icons/icon.ico" --add-data "C:/Users/STOCK/Códigos Fonte/Python/FlapPythonBird/res;res/" --hidden-import "pygame"  "C:/Users/STOCK/Códigos Fonte/Python/FlapPythonBird/game.py"
