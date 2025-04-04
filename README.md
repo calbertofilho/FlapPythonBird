@@ -1,14 +1,14 @@
 # FlapPythonBird
-Clone do jogo FlappyBird, desenvolvido em Python, utilizando a biblioteca Pygame
-
+### _Clone do jogo *FlappyBird* escrito em *Python*_<br />utilizando a biblioteca *Pygame*
 
 Dependências:
-- Biblioteca pygame
+* Biblioteca pygame
 ~~~sh
 python -m pip install -U pygame
 ~~~ 
 
-Requisitos para clonar o repositório:
+Requisitos: 
+* Clonar o repositório:
 ~~~sh
 python3 -m venv .env
 source .env/bin/activate
