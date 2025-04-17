@@ -19,7 +19,7 @@ from random import randint, choice
 from sys import platform as plat, exit as ext, path as syspath
 import pickle
 import pygame, sys
-from pygame.constants import QUIT, KEYDOWN, K_ESCAPE, K_SPACE
+from pygame.constants import QUIT, KEYDOWN, K_ESCAPE, K_SPACE, MOUSEBUTTONDOWN, BUTTON_LEFT
 # Constantes
 BASE_DIR = path.dirname(__file__)    # Diretorio do jogo
 SOUNDS_PATH = path.normpath(path.join(BASE_DIR, 'res/sounds'))
@@ -313,6 +313,10 @@ def main():
                 if event.key == K_SPACE:
                     splash = False
                     run = True
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == BUTTON_LEFT:
+                    splash = False
+                    run = True
         if high_score > 0:
             highscore = messages[2]                                       # Imagem de High Score
             highscore_x = SCREEN_WIDTH / 2 - highscore.get_width() / 2    # Pos X
@@ -335,6 +339,12 @@ def main():
                 if event.key == K_SPACE:
                     bird.bump()
                     pygame.mixer.Sound.play(sounds[WING])
+            if event.type == MOUSEBUTTONDOWN:
+                # Teste para saber se o botão direito do mouse foi pressionado
+                if event.button == BUTTON_LEFT:
+                    bird.bump()
+                    pygame.mixer.Sound.play(sounds[WING])
+
         # Desenho da imagem de fundo do jogo
         screen.blit(background, (0, 0))
         # Tomada de decisão quando o chão estiver fora da tela
